@@ -6,7 +6,7 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <Typography>
-          Welcome to React.js with Tensorflow Object Detection
+          Master Thesis: Visual Emotion Recognition In-The-Wild  -  Experiment User Testing
         </Typography>
       </Toolbar>
     </AppBar>
