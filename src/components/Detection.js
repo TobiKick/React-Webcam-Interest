@@ -143,7 +143,7 @@ function Detection () {
       <React.Fragment>
         <Grid container spacing={3} justify="center">
           <Grid item xs={8}>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/KD_zVo2wUMo?controls=0&amp;start=527" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe title="Experiment Video" width="560" height="315" src="https://www.youtube.com/embed/KD_zVo2wUMo?controls=0&amp;start=527" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </Grid>
           <Grid item xs={3}>
               <Grid item xs={12}>
