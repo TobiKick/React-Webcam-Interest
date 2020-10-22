@@ -143,11 +143,11 @@ function Detection () {
       <React.Fragment>
         <Grid container spacing={3} justify="center">
           <Grid item xs={8}>
-            <video id="myVideo" src="content/movie.mp4" height="100%" width="100%"></video>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/KD_zVo2wUMo?controls=0&amp;start=527" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </Grid>
           <Grid item xs={3}>
               <Grid item xs={12}>
-                <Webcam audio={false} ref={webcamRef} height="100%" width="100%" videoConstraints={videoConstraints}/>
+                <Webcam audio={false} ref={webcamRef} height="90%" width="90%" videoConstraints={videoConstraints}/>
               </Grid>
               <br/>
               <Grid item xs={12}>
