@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-import { Typography, Box, Button, TextField, Divider, Slider, Container, Grid, Paper } from "@material-ui/core";
+import { Typography, Button, TextField, Slider, Grid } from "@material-ui/core";
 import { sizing } from '@material-ui/system';
 
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
 import Prediction from "./Prediction";
-import {CSVLink, CSVDownload} from 'react-csv';
+import {CSVLink} from 'react-csv';
 
 
 function Detection () {
-  const [model, setModel] = useState(null);
-  const [imageSrc, setImageSrc] = useState(null);
-  const [predictions, setPredictions] = useState(null);
-  const [specificClass, setSpecificClass] = useState("");
   var val = 0
 
   const videoConstraints = {
@@ -21,32 +17,6 @@ function Detection () {
     height: 250,
     facingMode: "user"
   };
-
-/*
-  const WebcamCapture = () => {
-    const webcamRef = React.useRef(null);
-
-    const capture = React.useCallback(() => {
-      setImageSrc(webcamRef.current.getScreenshot());
-    }, [webcamRef]);
-
-    return (
-      <>
-        <Webcam
-          audio={false}
-          height={250}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          width={250}
-          videoConstraints={videoConstraints}
-          id={"webcamFeed"}
-        />
-        <br />
-        <Button onClick={capture}>Capture photo</Button>
-      </>
-    );
-  };
-*/
 
   const WebcamCapture = () => {
     const webcamRef = React.useRef(null);
@@ -69,7 +39,7 @@ function Detection () {
       var vid = document.getElementById("myVideo");
       vid.play()
 
-    }, [webcamRef, setCapturing, mediaRecorderRef]);
+    }, [webcamRef, setCapturing, mediaRecorderRef´, handleDataAvailable]);
 
     const handleDataAvailable = React.useCallback(
       ({ data }) => {
@@ -87,7 +57,7 @@ function Detection () {
       var vid = document.getElementById("myVideo");
       vid.pause()
 
-    }, [mediaRecorderRef, webcamRef, setCapturing]);
+    }, [mediaRecorderRef, setCapturing]);
 
     const handleDownload = React.useCallback(() => {
       if (recordedChunks.length) {
@@ -104,31 +74,7 @@ function Detection () {
         window.URL.revokeObjectURL(url);
         setRecordedChunks([]);
       }
-
-
-
-/*
-      const csvData =[
-        ['firstname', 'lastname', 'email'] ,
-        ['John', 'Doe' , 'john.doe@xyz.com'] ,
-        ['Jane', 'Doe' , 'jane.doe@xyz.com']
-      ];
-      <CSVLink data={csvData} >Download me</CSVLink>
-      // or
-
-
-
-      const url = URL.createObjectURL(recordedInterest);
-      const a = document.createElement("a");
-      document.body.appendChild(a);
-      a.style = "display: none";
-      a.href = url;
-      a.download = "interest.csv";
-      a.click();
-      window.URL.revokeObjectURL(url);
-      setRecordedInterest([]);
-*/
-    }, [recordedChunks, recordedInterest]);
+    }, [recordedChunks]);
 
 
     const handleInterestSlider = React.useCallback((value) => {
