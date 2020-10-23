@@ -39,7 +39,7 @@ function Detection () {
       var vid = document.getElementById("myVideo");
       vid.play()
 
-    }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
+    }, [webcamRef, setCapturing, mediaRecorderRef]);
 
     const handleDataAvailable = React.useCallback(
       ({ data }) => {
@@ -93,7 +93,7 @@ function Detection () {
           </Grid>
           <Grid item xs={3}>
               <Grid item xs={12}>
-                <Webcam audio={false} ref={webcamRef} height="90%" width="90%" videoConstraints={videoConstraints}/>
+                <Webcam audio={false} ref={webcamRef} height="80%" width="80%" videoConstraints={videoConstraints}/>
               </Grid>
               <br/>
               <Grid item xs={12}>
