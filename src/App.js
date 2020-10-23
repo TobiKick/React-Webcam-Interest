@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
-import Detection from "./components/Detection";
+import AppContent from "./components/AppContent";
 import Header from "./components/Header";
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <React.Fragment>
       <Header />
       <Paper style={{ margin: "20px", padding: "20px", marginTop: "80px" }}>
-        <Detection />
+        <AppContent />
       </Paper>
     </React.Fragment>
   );
