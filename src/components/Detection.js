@@ -39,7 +39,7 @@ function Detection () {
       var vid = document.getElementById("myVideo");
       vid.play()
 
-    }, [webcamRef, setCapturing, mediaRecorderRef´, handleDataAvailable]);
+    }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const handleDataAvailable = React.useCallback(
       ({ data }) => {
