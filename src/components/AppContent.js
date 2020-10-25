@@ -57,6 +57,15 @@ function Video (props) {
   );
 }
 
+/*
+player.nextVideo()
+
+player.loadPlaylist({list:String,
+                     listType:String,
+                     index:Number,
+                     startSeconds:Number}):Void
+*/
+
 function AppContent () {
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
@@ -150,7 +159,7 @@ function AppContent () {
               <br/>
               <Grid container justify="center" alignItems="center">
 
-                {capturing == true ? (
+                {capturing === true ? (
                       <Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStopCaptureClick}>Pause Capture</Button>
                     ) : recordedChunks.length > 0 ? (
                         <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
