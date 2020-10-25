@@ -27,20 +27,32 @@ function Video (props) {
       props.isPaused
         ? cElement.target.pauseVideo()
         : cElement.target.playVideo();
+
+      if (props.isRestarted){
+        cElement.target.seekTo(0)
+      }
     }
-  }, [props.isPaused]);
+  }, [props.isPaused, props.isRestarted]);
 
   const _onReady = event => {
     console.log("_onReady");
     cElement = event;
-    // event.target.playVideo();
+    cElement.target.seekTo(0);
+    cElement.target.pauseVideo();
   };
+
+  const _onEnd = event => {
+    console.log("_onEnd");
+    event.target.pauseVideo();
+    props.setCapturing(false);
+  }
 
   return (
     <YouTube
       videoId={"Yq79ibIx2sc"}
       opts={opts}
       onReady={_onReady}
+      onEnd={_onEnd}
     />
   );
 }
@@ -51,6 +63,7 @@ function AppContent () {
     const [recordedChunks, setRecordedChunks] = React.useState([]);
     const [recordedInterest, setRecordedInterest] = React.useState("");
     const [isPaused, setIsPaused] = useState(true);
+    const [isRestarted, setIsRestarted] = useState(false);
     const [capturing, setCapturing] = React.useState(false);
 
     var val = 0
@@ -80,7 +93,9 @@ function AppContent () {
         handleDataAvailable
       );
       mediaRecorderRef.current.start();
-    }, [webcamRef, setCapturing, setIsPaused, mediaRecorderRef, handleDataAvailable]);
+      setIsRestarted(false);
+
+    }, [webcamRef, setCapturing, setIsPaused, mediaRecorderRef, handleDataAvailable, setIsRestarted]);
 
     const handleStopCaptureClick = React.useCallback(() => {
       mediaRecorderRef.current.stop();
@@ -101,40 +116,56 @@ function AppContent () {
         a.download = "react-webcam-stream-capture.webm";
         a.click();
         window.URL.revokeObjectURL(url);
-        setRecordedChunks([]);
       }
     }, [recordedChunks]);
 
 
     const handleInterestSlider = React.useCallback((value) => {
-        setRecordedInterest((prev) => prev.concat((value.toString()) + ","))
-        console.log(recordedInterest)
-    }, [recordedInterest]);
+        if(capturing){
+            setRecordedInterest((prev) => prev.concat((value.toString()) + ","));
+            console.log(recordedInterest);
+        }else{
+            console.log("Not recording!");
+            console.log(recordedInterest);
+        }
+    }, [setRecordedInterest, recordedInterest, capturing]);
 
+    const handleRestartCaptureClick = React.useCallback((value) => {
+        console.log("Restart");
+        setIsRestarted(true);
+        setRecordedChunks([]);
+
+    }, [setRecordedChunks, setIsRestarted]);
 
     return (
       <React.Fragment>
-        <Grid container spacing={3} justify="center">
+        <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
-            <Video isPaused={isPaused}/>
+            <div style={{pointerEvents: "none"}}><Video isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
           </Grid>
           <Grid item xs={3}>
-              <Grid item xs={12}>
+              <Grid container justify="center" alignItems="center">
                 <Webcam audio={false} ref={webcamRef} height="80%" width="80%" videoConstraints={videoConstraints}/>
               </Grid>
               <br/>
-              <Grid item xs={12}>
-                {capturing ? (
-                      <Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStopCaptureClick}>Stop Capture</Button>
+              <Grid container justify="center" alignItems="center">
+
+                {capturing == true ? (
+                      <Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStopCaptureClick}>Pause Capture</Button>
+                    ) : recordedChunks.length > 0 ? (
+                        <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
+                            <Grid item><Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStartCaptureClick}>Resume Capture</Button>
+                            </Grid><Grid item><CSVLink data={recordedInterest} filename={"results_interest.csv"} separator={","}><Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleDownload}>Download results</Button></CSVLink>
+                            </Grid><Grid item><Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleRestartCaptureClick}>Restart experiment</Button>
+                            </Grid>
+                        </Grid>
                     ) : (
-                      <Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStartCaptureClick}>Start Capture</Button>
-                    )}
-                    {recordedChunks.length > 0 && (
-                      <CSVLink data={recordedInterest} filename={"results_interest.csv"} separator={","}><Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleDownload}>Download</Button></CSVLink>
+                        <Button color="primary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleStartCaptureClick}>Start Capture</Button>
                     )}
               </Grid>
            </Grid>
-           <Grid item xs={8}>
+           <Grid item xs={5}>
+           <br />
              <Typography id="discrete-slider-always" gutterBottom>
                Current level of interest
              </Typography>
@@ -147,6 +178,20 @@ function AppContent () {
                min={-5}
                max={+5}
                step={1}
+               marks={[
+                        {
+                          value: -5,
+                          label: 'very uninteresting',
+                        },
+                        {
+                          value: 0,
+                          label: 'neutral'
+                        },
+                        {
+                          value: +5,
+                          label: 'very interesting',
+                        }
+                      ]}
                valueLabelDisplay="on"
              />
            </Grid>
@@ -158,4 +203,3 @@ function AppContent () {
 
 
 export default AppContent;
-
