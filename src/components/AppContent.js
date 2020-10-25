@@ -2,69 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Slider, Grid } from "@material-ui/core";
 import Webcam from "react-webcam";
 import {CSVLink} from 'react-csv';
-import YouTube from "react-youtube";
+
 
 /*import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import YoutubeContainer from "./YoutubeContainer";
 import Prediction from "./Prediction"; */
-var cElement = null;
 
-function Video (props) {
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 0,
-      controls: 0,
-      disablekb: 1
-    }
-  };
-
-  useEffect(() => {
-    if (cElement) {
-      console.log("isPaused: " + props.isPaused)
-      props.isPaused
-        ? cElement.target.pauseVideo()
-        : cElement.target.playVideo();
-
-      if (props.isRestarted){
-        cElement.target.seekTo(0)
-      }
-    }
-  }, [props.isPaused, props.isRestarted]);
-
-  const _onReady = event => {
-    console.log("_onReady");
-    cElement = event;
-    cElement.target.seekTo(0);
-    cElement.target.pauseVideo();
-  };
-
-  const _onEnd = event => {
-    console.log("_onEnd");
-    event.target.pauseVideo();
-    props.setCapturing(false);
-  }
-
-  return (
-    <YouTube
-      videoId={"Yq79ibIx2sc"}
-      opts={opts}
-      onReady={_onReady}
-      onEnd={_onEnd}
-    />
-  );
-}
-
-/*
-player.nextVideo()
-
-player.loadPlaylist({list:String,
-                     listType:String,
-                     index:Number,
-                     startSeconds:Number}):Void
-*/
+import Video from "./Video";
 
 function AppContent () {
     const webcamRef = React.useRef(null);
@@ -74,6 +18,7 @@ function AppContent () {
     const [isPaused, setIsPaused] = useState(true);
     const [isRestarted, setIsRestarted] = useState(false);
     const [capturing, setCapturing] = React.useState(false);
+    const playerRef = React.createRef();
 
     var val = 0
     const videoConstraints = {
@@ -128,10 +73,14 @@ function AppContent () {
       }
     }, [recordedChunks]);
 
+    async function getCurrentPlayerTime(value){
+        var ctime = await playerRef.current.getInternalPlayer().getCurrentTime()
+        setRecordedInterest((prev) => prev.concat((value.toString()) + ", " + ctime.toString() + "\n"));
+    }
 
     const handleInterestSlider = React.useCallback((value) => {
         if(capturing){
-            setRecordedInterest((prev) => prev.concat((value.toString()) + ","));
+            getCurrentPlayerTime(value);
             console.log(recordedInterest);
         }else{
             console.log("Not recording!");
@@ -150,7 +99,7 @@ function AppContent () {
       <React.Fragment>
         <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
-            <div style={{pointerEvents: "none"}}><Video isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+            <div style={{pointerEvents: "none"}}><Video ref={playerRef} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
           </Grid>
           <Grid item xs={3}>
               <Grid container justify="center" alignItems="center">
