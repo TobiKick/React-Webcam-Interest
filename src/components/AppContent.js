@@ -73,20 +73,20 @@ function AppContent () {
       }
     }, [recordedChunks]);
 
-    async function getCurrentPlayerTime(value){
-        var ctime = await playerRef.current.getInternalPlayer().getCurrentTime()
-        setRecordedInterest((prev) => prev.concat((value.toString()) + ", " + ctime.toString() + "\n"));
-    }
-
     const handleInterestSlider = React.useCallback((value) => {
         if(capturing){
-            getCurrentPlayerTime(value);
-            console.log(recordedInterest);
+            playerRef.current.getInternalPlayer().getCurrentTime().then((successMsg) => {
+                console.log(successMsg);
+                setRecordedInterest((prev) => prev.concat((value.toString()) + ", " + successMsg + "\n"));
+            })
+            .catch((errorMsg) => {
+                console.log("Error:" + errorMsg);
+            })
         }else{
             console.log("Not recording!");
             console.log(recordedInterest);
         }
-    }, [recordedInterest, capturing, getCurrentPlayerTime]);
+    }, [setRecordedInterest, recordedInterest, capturing, playerRef]);
 
     const handleRestartCaptureClick = React.useCallback((value) => {
         console.log("Restart");
