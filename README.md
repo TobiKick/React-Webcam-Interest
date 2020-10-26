@@ -1,6 +1,6 @@
 # Master Thesis 'Emotion Recognition In-The-Wild' - User Survery
 
-Using a machine learning toolkit of your choice, create a tool which identifies objects in the image, then returns positions in pixels corresponding to bounding boxes of a user-selected class of object in the image. For example, given an image with both cats and dogs, return bounding boxes for only cats.
+A website that acts as a survey tool for the Master thesis 'Emotion Recognition In-The-Wild' at the University of Hamburg. The tool is displaying a video, while at the same time capturing a user's webcam stream, as well as the input given through the slider indicating the person's interest. The output of this survey can be downloaded after pausing the capturing/video and should be sent to the researcher for further analysis in terms of interest identified by performing Emotion Recognition.
 
 ![screenshot](/Screenshots/masterthesis_survey.PNG)
 
