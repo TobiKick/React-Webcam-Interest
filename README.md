@@ -2,7 +2,7 @@
 
 Using a machine learning toolkit of your choice, create a tool which identifies objects in the image, then returns positions in pixels corresponding to bounding boxes of a user-selected class of object in the image. For example, given an image with both cats and dogs, return bounding boxes for only cats.
 
-![screenshot](/Screenshots/masterthesis_survey.jpeg)
+![screenshot](/Screenshots/masterthesis_survey.PNG)
 
 
 ## Live Demo - [Click Here](https://survey.tobiaskick.com)
