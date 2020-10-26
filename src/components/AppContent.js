@@ -86,7 +86,7 @@ function AppContent () {
             console.log("Not recording!");
             console.log(recordedInterest);
         }
-    }, [setRecordedInterest, recordedInterest, capturing, getCurrentPlayerTime]);
+    }, [recordedInterest, capturing, getCurrentPlayerTime]);
 
     const handleRestartCaptureClick = React.useCallback((value) => {
         console.log("Restart");
