@@ -45,7 +45,7 @@ const Video = (props, ref) => {
   return (
     <YouTube
       ref={ref}
-      videoId={"Yq79ibIx2sc"}
+      videoId={props.videoId}
       opts={opts}
       onReady={_onReady}
       onEnd={_onEnd}
@@ -55,13 +55,3 @@ const Video = (props, ref) => {
 
 const forwardedRef = React.forwardRef(Video);
 export default forwardedRef;
-
-
-/*
-player.nextVideo()
-
-player.loadPlaylist({list:String,
-                     listType:String,
-                     index:Number,
-                     startSeconds:Number}):Void
-*/

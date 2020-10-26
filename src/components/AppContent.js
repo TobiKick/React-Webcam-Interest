@@ -19,13 +19,20 @@ function AppContent () {
     const [isRestarted, setIsRestarted] = useState(false);
     const [capturing, setCapturing] = React.useState(false);
     const playerRef = React.createRef();
+    const [isNextVideo, setIsNextVideo] = React.useState(false);
 
+    const playList = [
+            "F_R8QG00aUg",
+            "n8-CVt7Kf6o"
+        ];
     var val = 0
     const videoConstraints = {
         width: 250,
         height: 250,
         facingMode: "user"
     };
+
+
 
     const handleDataAvailable = React.useCallback(
       ({ data }) => {
@@ -67,11 +74,14 @@ function AppContent () {
         document.body.appendChild(a);
         a.style = "display: none";
         a.href = url;
-        a.download = "react-webcam-stream-capture.webm";
+        if (isNextVideo === false){
+            a.download = playList[0] + ".webm"
+        } else { a.download = playList[1] + ".webm" };
+
         a.click();
         window.URL.revokeObjectURL(url);
       }
-    }, [recordedChunks]);
+    }, [recordedChunks, isNextVideo, playList]);
 
     const handleInterestSlider = React.useCallback((value) => {
         if(capturing){
@@ -92,14 +102,29 @@ function AppContent () {
         console.log("Restart");
         setIsRestarted(true);
         setRecordedChunks([]);
-
     }, [setRecordedChunks, setIsRestarted]);
+
+    const handleNextVideo = React.useCallback((value) => {
+        setIsNextVideo(true);
+        setCapturing(false);
+        setIsPaused(true);
+    }, [setIsNextVideo, setCapturing, setIsPaused]);
+
+    const handlePreviousVideo = React.useCallback((value) => {
+        setIsNextVideo(false);
+        setCapturing(false);
+        setIsPaused(true);
+    }, [setIsNextVideo, setCapturing, setIsPaused]);
 
     return (
       <React.Fragment>
         <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
-            <div style={{pointerEvents: "none"}}><Video ref={playerRef} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+              {isNextVideo === false ? (
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[0]} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+              ) : (
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[1]} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+              )}
           </Grid>
           <Grid item xs={3}>
               <Grid container justify="center" alignItems="center">
@@ -122,36 +147,47 @@ function AppContent () {
                     )}
               </Grid>
            </Grid>
-           <Grid item xs={5}>
-           <br />
-             <Typography id="discrete-slider-always" gutterBottom>
-               Current level of interest
-             </Typography>
-             <Slider
-               onChange={ (e, value) => val = value}
-               onChangeCommitted={ (e, value) => handleInterestSlider(val)}
-               defaultValue={0}
-               // getAriaValueText={"Interest"}
-               aria-labelledby="discrete-slider-always"
-               min={-5}
-               max={+5}
-               step={1}
-               marks={[
-                        {
-                          value: -5,
-                          label: 'very uninteresting',
-                        },
-                        {
-                          value: 0,
-                          label: 'neutral'
-                        },
-                        {
-                          value: +5,
-                          label: 'very interesting',
-                        }
-                      ]}
-               valueLabelDisplay="on"
-             />
+           <Grid container justify="space-evenly">
+               <Grid item xs={2}>
+                   {isNextVideo === false ? (
+                       <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleNextVideo}>NEXT VIDEO</Button>
+                    ) : (
+                       <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handlePreviousVideo}>PREVIOUS VIDEO</Button>
+                    )}
+               </Grid>
+               <Grid item xs={3}></Grid>
+               <Grid item xs={5}>
+               <br />
+                 <Typography id="discrete-slider-always" gutterBottom>
+                   Current level of interest
+                 </Typography>
+                 <Slider
+                   onChange={ (e, value) => val = value}
+                   onChangeCommitted={ (e, value) => handleInterestSlider(val)}
+                   defaultValue={0}
+                   // getAriaValueText={"Interest"}
+                   aria-labelledby="discrete-slider-always"
+                   min={-5}
+                   max={+5}
+                   step={1}
+                   marks={[
+                            {
+                              value: -5,
+                              label: 'very uninteresting',
+                            },
+                            {
+                              value: 0,
+                              label: 'neutral'
+                            },
+                            {
+                              value: +5,
+                              label: 'very interesting',
+                            }
+                          ]}
+                   valueLabelDisplay="on"
+                 />
+               </Grid>
+               <Grid item xs={2}></Grid>
            </Grid>
         </Grid>
       </React.Fragment>
