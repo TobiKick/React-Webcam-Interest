@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Typography, Button, Slider, Grid } from "@material-ui/core";
 import Webcam from "react-webcam";
 import {CSVLink} from 'react-csv';
@@ -86,7 +86,7 @@ function AppContent () {
             console.log("Not recording!");
             console.log(recordedInterest);
         }
-    }, [setRecordedInterest, recordedInterest, capturing]);
+    }, [setRecordedInterest, recordedInterest, capturing, getCurrentPlayerTime]);
 
     const handleRestartCaptureClick = React.useCallback((value) => {
         console.log("Restart");
