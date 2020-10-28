@@ -6,7 +6,7 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <Typography>
-          Master Thesis: Visual Emotion Recognition In-The-Wild - Survey
+          Master Thesis: Visual Emotion Recognition In-The-Wild - User Experiment
         </Typography>
       </Toolbar>
     </AppBar>
