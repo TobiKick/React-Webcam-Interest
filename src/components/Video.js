@@ -39,7 +39,7 @@ const Video = (props, ref) => {
   const _onEnd = event => {
     console.log("_onEnd");
     event.target.pauseVideo();
-    props.setCapturing(false);
+    props.stopCapturing();
   }
 
   return (

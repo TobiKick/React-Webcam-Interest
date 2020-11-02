@@ -121,9 +121,9 @@ function AppContent () {
         <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
               {isNextVideo === false ? (
-                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[0]} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[0]} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
               ) : (
-                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[1]} isPaused={isPaused} isRestarted={isRestarted} setCapturing={setCapturing}/></div>
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[1]} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
               )}
           </Grid>
           <Grid item xs={3}>
