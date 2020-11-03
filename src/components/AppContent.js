@@ -21,10 +21,7 @@ function AppContent () {
     const playerRef = React.createRef();
     const [isNextVideo, setIsNextVideo] = React.useState(false);
 
-    const playList = [
-            "F_R8QG00aUg",
-            "n8-CVt7Kf6o"
-        ];
+    const playList = [{id: "F_R8QG00aUg", name: "RPA"}, {id: "n8-CVt7Kf6o", name: "NPL"}];
     var val = 0
     const videoConstraints = {
         width: 250,
@@ -75,13 +72,13 @@ function AppContent () {
         a.style = "display: none";
         a.href = url;
         if (isNextVideo === false){
-            a.download = playList[0] + ".webm"
-        } else { a.download = playList[1] + ".webm" };
+            a.download = playList[0].name + ".webm"
+        } else { a.download = playList[1].name + ".webm" };
 
         a.click();
         window.URL.revokeObjectURL(url);
       }
-    }, [recordedChunks, isNextVideo, playList]);
+    }, [recordedChunks, isNextVideo, playList, setRecordedInterest]);
 
     const handleInterestSlider = React.useCallback((value) => {
         if(capturing){
@@ -102,28 +99,33 @@ function AppContent () {
         console.log("Restart");
         setIsRestarted(true);
         setRecordedChunks([]);
-    }, [setRecordedChunks, setIsRestarted]);
+        setRecordedInterest("")
+    }, [setRecordedChunks, setIsRestarted, setRecordedInterest]);
 
     const handleNextVideo = React.useCallback((value) => {
         setIsNextVideo(true);
         setCapturing(false);
         setIsPaused(true);
-    }, [setIsNextVideo, setCapturing, setIsPaused]);
+        setRecordedChunks([]);
+        setRecordedInterest("")
+    }, [setIsNextVideo, setCapturing, setIsPaused, setRecordedChunks, setRecordedInterest]);
 
     const handlePreviousVideo = React.useCallback((value) => {
         setIsNextVideo(false);
         setCapturing(false);
         setIsPaused(true);
-    }, [setIsNextVideo, setCapturing, setIsPaused]);
+        setRecordedChunks([]);
+        setRecordedInterest("")
+    }, [setIsNextVideo, setCapturing, setIsPaused, setRecordedChunks, setRecordedInterest]);
 
     return (
       <React.Fragment>
         <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
               {isNextVideo === false ? (
-                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[0]} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[0].id} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
               ) : (
-                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[1]} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
+                    <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[1].id} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
               )}
           </Grid>
           <Grid item xs={3}>
