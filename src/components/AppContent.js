@@ -30,7 +30,6 @@ function AppContent () {
     };
 
 
-
     const handleDataAvailable = React.useCallback(
       ({ data }) => {
         if (data.size > 0) {
@@ -71,6 +70,7 @@ function AppContent () {
         document.body.appendChild(a);
         a.style = "display: none";
         a.href = url;
+        
         if (isNextVideo === false){
             a.download = playList[0].name + ".webm"
         } else { a.download = playList[1].name + ".webm" };
@@ -78,7 +78,7 @@ function AppContent () {
         a.click();
         window.URL.revokeObjectURL(url);
       }
-    }, [recordedChunks, isNextVideo, playList, setRecordedInterest]);
+    }, [recordedChunks, isNextVideo, playList]);
 
     const handleInterestSlider = React.useCallback((value) => {
         if(capturing){
