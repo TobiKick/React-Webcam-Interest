@@ -21,7 +21,7 @@ function AppContent () {
     const playerRef = React.createRef();
     const [isNextVideo, setIsNextVideo] = React.useState(false);
 
-    const playList = [{id: "F_R8QG00aUg", name: "RPA"}, {id: "n8-CVt7Kf6o", name: "NPL"}];
+    const playList = [{id: "v2kV6pgJxuo", name: "Bosch"}, {id: "K9vFWA1rnWc", name: "Thai"}];
     var val = 0
     const videoConstraints = {
         width: 250,
