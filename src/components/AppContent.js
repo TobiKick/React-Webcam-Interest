@@ -88,9 +88,8 @@ function AppContent () {
             })
         }else{
             console.log("Not recording!");
-            console.log(recordedInterest);
         }
-    }, [setRecordedInterest, recordedInterest, capturing, playerRef]);
+    }, [setRecordedInterest, capturing, playerRef]);
 
     const handleRestartCaptureClick = React.useCallback((value) => {
         console.log("Restart");
@@ -114,6 +113,7 @@ function AppContent () {
         setRecordedChunks([]);
         setRecordedInterest("")
     }, [currentVideo, setCurrentVideo, setCapturing, setIsPaused, setRecordedChunks, setRecordedInterest]);
+
 
     return (
       <React.Fragment>
@@ -160,30 +160,42 @@ function AppContent () {
                    Current level of interest
                  </Typography>
                  <Slider
-                   onChange={ (e, value) => val = value}
-                   onChangeCommitted={ (e, value) => handleInterestSlider(val)}
-                   defaultValue={0}
-                   // getAriaValueText={"Interest"}
-                   aria-labelledby="discrete-slider-always"
-                   min={-5}
-                   max={+5}
-                   step={1}
-                   marks={[
-                            {
-                              value: -5,
-                              label: 'very uninteresting',
-                            },
-                            {
-                              value: 0,
-                              label: 'neutral'
-                            },
-                            {
-                              value: +5,
-                              label: 'very interesting',
-                            }
-                          ]}
-                   valueLabelDisplay="on"
-                 />
+                      onChange={ (e, value) => val = value}
+                      onChangeCommitted={ (e, value) => handleInterestSlider(val)}
+                      defaultValue={0}
+                      // getAriaValueText={"Interest"}
+                      aria-labelledby="discrete-slider-always"
+                      min={0}
+                      max={+5}
+                      step={1}
+                      marks={[
+                               {
+                                 value: 0,
+                                 label: 'not interesting'
+                               },
+                               {
+                                 value: 1,
+                                 label: '1'
+                               },
+                               {
+                                 value: 2,
+                                 label: '2'
+                               },
+                               {
+                                 value: 3,
+                                 label: '3'
+                               },
+                               {
+                                 value: 4,
+                                 label: '4'
+                               },
+                               {
+                                 value: +5,
+                                 label: 'very interesting',
+                               }
+                             ]}
+                      valueLabelDisplay="on"
+                    />
                  <br /><br />
                </Grid>
                <Grid item xs={3}></Grid>
