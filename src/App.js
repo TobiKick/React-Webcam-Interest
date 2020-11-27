@@ -20,7 +20,7 @@ const App = () => {
                 </Button>
               }
             >
-              A video file of your recording will be created during this experiment --- Please send the output files (video + csv) per e-mail to the researcher. <br />  Received data will be stored for further analysis maximum until the thesis submission!
+              A video file of your recording will be created during this experiment ---> Please send the output files (video + csv) per e-mail to the researcher. <br /><b>The received video will only be used for the purpose of Emotion Recognition. Images/Videos will not appear in the thesis itself.</b>
             </Alert><br /></div>
         ) : (
         <div></div>
