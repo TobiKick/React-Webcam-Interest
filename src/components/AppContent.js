@@ -117,6 +117,74 @@ function AppContent () {
 
     return (
       <React.Fragment>
+      <Grid container justify="space-evenly">
+         <Grid item xs={3}></Grid>
+         <Grid item xs={6}><br />
+         <br />
+           <Typography id="discrete-slider-always" gutterBottom>
+             Current level of interest
+           </Typography>
+           <Slider
+                onChange={ (e, value) => val = value}
+                onChangeCommitted={ (e, value) => handleInterestSlider(val)}
+                defaultValue={0}
+                // getAriaValueText={"Interest"}
+                aria-labelledby="discrete-slider-always"
+                min={0}
+                max={10}
+                step={1}
+                marks={[
+                         {
+                           value: 0,
+                           label: 'not interesting'
+                         },
+                         {
+                           value: 1,
+                           label: '1'
+                         },
+                         {
+                           value: 2,
+                           label: '2'
+                         },
+                         {
+                           value: 3,
+                           label: '3'
+                         },
+                         {
+                           value: 4,
+                           label: '4'
+                         },
+                         {
+                          value: 5,
+                          label: '5'
+                        },
+                        {
+                          value: 6,
+                          label: '6'
+                        },
+                        {
+                          value: 7,
+                          label: '7'
+                        },
+                        {
+                          value: 8,
+                          label: '8'
+                        },
+                        {
+                          value: 9,
+                          label: '9'
+                        },
+                         {
+                           value: 10,
+                           label: 'very interesting',
+                         }
+                       ]}
+                valueLabelDisplay="on"
+              />
+           <br /><br />
+         </Grid>
+         <Grid item xs={3}></Grid>
+     </Grid>
         <Grid container spacing={3} justify="center" alignItems="flex-start">
           <Grid item xs={9}>
               <div style={{pointerEvents: "none"}}><Video ref={playerRef} videoId={playList[currentVideo].link} isPaused={isPaused} isRestarted={isRestarted} stopCapturing={handleStopCaptureClick}/></div>
@@ -142,84 +210,18 @@ function AppContent () {
                     )}
               </Grid>
            </Grid>
-
            <Grid container justify="space-evenly">
-               <Grid item xs={2}>
-                   {playList.some(elem => elem.id === (currentVideo -1)) &&
-                        <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handlePreviousVideo}>PREVIOUS VIDEO</Button>
-                   }
-                   <div><br /></div>
-                   {playList.some(elem => elem.id === (currentVideo +1)) &&
-                        <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleNextVideo}>NEXT VIDEO</Button>
-                   }
-               </Grid>
-               <Grid item xs={1}></Grid>
-               <Grid item xs={6}><br />
-               <br />
-                 <Typography id="discrete-slider-always" gutterBottom>
-                   Current level of interest
-                 </Typography>
-                 <Slider
-                      onChange={ (e, value) => val = value}
-                      onChangeCommitted={ (e, value) => handleInterestSlider(val)}
-                      defaultValue={0}
-                      // getAriaValueText={"Interest"}
-                      aria-labelledby="discrete-slider-always"
-                      min={0}
-                      max={10}
-                      step={1}
-                      marks={[
-                               {
-                                 value: 0,
-                                 label: 'not interesting'
-                               },
-                               {
-                                 value: 1,
-                                 label: '1'
-                               },
-                               {
-                                 value: 2,
-                                 label: '2'
-                               },
-                               {
-                                 value: 3,
-                                 label: '3'
-                               },
-                               {
-                                 value: 4,
-                                 label: '4'
-                               },
-                               {
-                                value: 5,
-                                label: '5'
-                              },
-                              {
-                                value: 6,
-                                label: '6'
-                              },
-                              {
-                                value: 7,
-                                label: '7'
-                              },
-                              {
-                                value: 8,
-                                label: '8'
-                              },
-                              {
-                                value: 9,
-                                label: '9'
-                              },
-                               {
-                                 value: 10,
-                                 label: 'very interesting',
-                               }
-                             ]}
-                      valueLabelDisplay="on"
-                    />
-                 <br /><br />
-               </Grid>
-               <Grid item xs={3}></Grid>
-           </Grid>
+              <Grid item xs={12}>
+                  {playList.some(elem => elem.id === (currentVideo -1)) &&
+                       <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handlePreviousVideo}>PREVIOUS VIDEO</Button>
+                  }
+
+                  {playList.some(elem => elem.id === (currentVideo +1)) &&
+                       <Button color="secondary" variant="contained" style={{ height: "56px", marginLeft: "20px" }} onClick={handleNextVideo}>NEXT VIDEO</Button>
+                  }
+              </Grid>
+          </Grid>
+
         </Grid>
       </React.Fragment>
     );
