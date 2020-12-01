@@ -20,7 +20,7 @@ const App = () => {
                 </Button>
               }
             >
-              A video file of your recording will be created during this experiment ---> Please send the output files (video + csv) by e-mail to <b>tkick93@gmail.com</b><br /><b>The received video will only be used for the purpose of Emotion Recognition. Images/Videos will not appear in the thesis itself.</b>
+              <b>Please make sure your webcam is working!</b> Your face will be recorded <br /> ---> For each video clip <b>download the results separately!!</b> Please send the output files (video + csv) by e-mail to <b>tkick93@gmail.com</b><br /><br />The received video will only be used for the purpose of Emotion Recognition. Images/Videos will not appear in the thesis itself.
             </Alert></div>
         ) : (
         <div></div>
