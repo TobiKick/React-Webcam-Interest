@@ -1,4 +1,4 @@
-# User Experiment 4 Master Thesis 'Emotion Recognition In-The-Wild'
+# User Experiment 4 Master Thesis 'Visual Emotion Recognition in The Wild'
 
 A website that acts as a survey tool for the Master thesis 'Emotion Recognition In-The-Wild' at the University of Hamburg. The tool is displaying a video, while at the same time capturing a user's webcam stream, as well as the input given through the slider indicating the person's interest. The output of this survey can be downloaded after pausing the capturing/video and should be sent to the researcher for further analysis in terms of interest identified by performing Emotion Recognition.
 
