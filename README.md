@@ -24,7 +24,7 @@ By capturing a user's emotion in real-time on the developed website, I could ide
 5. Click on 'Next Video' to change to the next video in the playlist
 
 ## Tools & Resources:
-• ReactJS, HTML, CSS
+• ReactJS, HTML, CSS <br />
 • [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html) - Get started with React here<br />
 • [Material-UI](https://material-ui.com/) - React components for faster and easier web development<br />
 • [TensorFlow.js](https://www.tensorflow.org/js) - A library for machine learning in Javascript<br />
