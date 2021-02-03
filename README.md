@@ -23,24 +23,20 @@ By capturing a user's emotion in real-time on the developed website, I could ide
 4. Click 'Pause Capture' to make the 'Download results' button and the 'Restart experiment' button appear
 5. Click on 'Next Video' to change to the next video in the playlist
 
-## Resources:
+## Tools & Resources:
+• ReactJS, HTML, CSS
 • [Create a New React App](https://reactjs.org/docs/create-a-new-react-app.html) - Get started with React here<br />
 • [Material-UI](https://material-ui.com/) - React components for faster and easier web development<br />
 • [TensorFlow.js](https://www.tensorflow.org/js) - A library for machine learning in Javascript<br />
 • [React Webcam](https://www.npmjs.com/package/react-webcam) - Webcam component for React<br />
 • [React Youtube](https://www.npmjs.com/package/react-youtube) - YouTube component for React<br />
 
-
 ## References:
 • https://github.com/amogh-w/React-Tensorflow-Object-Detection
 
 
 ## Available Scripts:
-
 In the project directory, you can run: `npm start`
-
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
 ---
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
