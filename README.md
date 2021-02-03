@@ -1,8 +1,9 @@
 # User Experiment - Interest identification with emotion recognition (ER)
 [Web Development] Web application created with ReactJS for a user experiment conducted during my Master's thesis @ University of Hamburg
 
-<img src="https://i.ibb.co/HVTtV2Y/thesis-experiment.png/" alt="User experiment web application">
-
+<p>
+  <img src="https://i.ibb.co/HVTtV2Y/thesis-experiment.png/" alt="User experiment web application" height="100%">
+</p>
 
 ## Goal: 
 Creation of a frontend web application that shows users different ads and records their webcam stream only when the video is playing.
