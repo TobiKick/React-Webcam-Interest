@@ -2,7 +2,7 @@
 [Web Development] Web application created with ReactJS for a user experiment conducted during my Master's thesis @ University of Hamburg
 
 <p>
-  <img src="https://i.ibb.co/HVTtV2Y/thesis-experiment.png/" alt="User experiment web application" height="100%">
+  <img src="./Screenshots/masterthesis_survey.PNG" alt="User experiment web application" height="100%">
 </p>
 
 ## Goal: 
